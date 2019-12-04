@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'New Article being added',
+    date: 'December 4th, 2019',
+    firstParagraph: `yoiw4j5y;oije;oijer;oigjeo;itjoeijrt `,
+
+    secondParagraph: `eo;rgijae;oigjoa;eijrto;aeiiitjnhnnruhi `,
+
+    thirdParagraph: `ijrob-re0eiogktijejiejrgiejrgodijrgoidjoigjdoigjodi`
   }
 ];
 
@@ -112,3 +121,57 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+// 1. create component function:
+
+function createComponent(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+
+  // define new Elements:
+  const articleDiv = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const pDate = document.createElement('p');
+  const paragraph1 = document.createElement('p');
+  const paragraph2 = document.createElement('p');
+  const paragraph3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  //setup structure: 
+  articleDiv.appendChild(articleTitle);
+  articleDiv.appendChild(pDate);
+  articleDiv.appendChild(paragraph1);
+  articleDiv.appendChild(paragraph2);
+  articleDiv.appendChild(paragraph3);
+  articleDiv.appendChild(expandButton);
+
+  //class names: 
+  articleDiv.classList.add('article');
+  pDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  //text Content
+  articleTitle.textContent = title;
+  pDate.textContent = date;
+  paragraph1.textContent = firstParagraph;
+  paragraph2.textContent = secondParagraph;
+  paragraph3.textContent = thirdParagraph;
+  expandButton.textContent = 'expand';
+
+  //toggle span: 
+  expandButton.addEventListener('click', () => {
+    articleDiv.classList.toggle('article-open');
+  })
+
+
+
+return articleDiv;
+
+}
+
+//grab parent div to append data to
+
+const articlePlace = document.querySelector('.articles');
+
+//loop through data: 
+data.map(item => {
+  articlePlace.appendChild(createComponent(item.title, item.date, item.firstParagraph, item.secondParagraph, item.thirdParagraph))
+})
